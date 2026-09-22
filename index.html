@@ -5,8 +5,19 @@ body{background:radial-gradient(ellipse at 50% 30%,#faf7ef 0%,#ede7db 75%,#e5ded
 .record-button{position:fixed;right:max(20px,env(safe-area-inset-right));top:max(18px,env(safe-area-inset-top));z-index:10;width:48px;height:48px;padding:3px;border:0;background:transparent;border-radius:50%;touch-action:manipulation}.record{display:block;width:42px;height:42px;border-radius:50%;background:repeating-radial-gradient(circle at center,transparent 0 2px,#ffffff0c 2px 3px),conic-gradient(#262923,#51564a,#242721,#41463b,#262923);box-shadow:0 3px 10px #30332625;position:relative;animation:spin 9s linear infinite;animation-play-state:paused}.record:before{content:'';position:absolute;inset:13px;border-radius:50%;background:#a8ad94;border:1px solid #c1c4ac}.record:after{content:'';position:absolute;inset:19px;border-radius:50%;background:#eee8dc}.record-button.playing .record{animation-play-state:running}.record-button:after{content:'';position:absolute;right:2px;bottom:3px;width:6px;height:6px;border-radius:50%;background:#b4b0a1;border:1px solid #f5f0e5}.record-button.playing:after{background:#6b7958}@keyframes spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.record{animation:none!important}}@media(max-width:480px){body{padding-top:80px}}
 
 .music-hint{position:absolute;right:57px;top:13px;display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:11px;letter-spacing:1px;color:#747b68}.music-hint svg{flex:none}.record-button{top:calc(env(safe-area-inset-top,0px) + 16px);right:calc(env(safe-area-inset-right,0px) + 18px);width:50px;height:50px}.record-button.playing .music-hint{color:#8a907e}input{font-size:16px}body{padding:calc(env(safe-area-inset-top,0px) + 94px) max(22px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom,0px) + 28px) max(22px,env(safe-area-inset-left));min-height:100svh}main{min-width:0;width:min(390px,100%)}audio{max-width:100%}@media(max-width:360px){.envelope{width:230px;height:144px}.subtitle{font-size:12px;letter-spacing:1px}.letter-top{margin-bottom:34px}}@media(max-height:600px){body{display:block}main{margin:0 auto}.letter-top{margin-bottom:28px}.envelope{height:130px;width:224px;margin-bottom:24px}.seal{top:51px}.subtitle{margin-bottom:24px}}
+
+/* Minimal voice controls, in the letter's paper and olive palette. */
+.voice-controls{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid #aaa38d50;border-bottom:1px solid #aaa38d50}
+.voice-toggle{flex:0 0 44px;width:44px;height:44px;padding:12px;border:1px solid #aaa38d70;border-radius:50%;background:transparent;color:#606953;display:grid;place-items:center;min-height:44px}
+.voice-toggle:hover{background:#6069530c}.voice-toggle svg{width:18px;height:18px;fill:currentColor}.voice-track{flex:1;min-width:0}
+input.voice-seek{appearance:none;-webkit-appearance:none;width:100%;height:28px;margin:0;padding:0;border:0;border-radius:0;letter-spacing:normal;background:transparent;cursor:pointer;accent-color:#606953}
+.voice-seek::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(to right,#606953 var(--progress,0%),#c6c1b0 var(--progress,0%))}
+.voice-seek::-moz-range-track{height:3px;border-radius:2px;background:#c6c1b0}.voice-seek::-moz-range-progress{height:3px;background:#606953}
+.voice-seek::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:12px;height:12px;margin-top:-4.5px;border:0;border-radius:50%;background:#606953}
+.voice-seek::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:#606953}
+.voice-seek:disabled{opacity:.5;cursor:default}.voice-time{display:block;text-align:right;font-size:11px;color:#787b6d;font-variant-numeric:tabular-nums;letter-spacing:1px;line-height:1.6}
 </style></head>
-<body><button id="music" class="record-button" type="button" aria-label="播放背景音乐" aria-pressed="false" title="播放背景音乐"><span class="music-hint" aria-hidden="true"><span id="music-label">轻点听音乐</span><svg width="33" height="20" viewBox="0 0 33 20" fill="none"><path d="M1 16Q14 1 29 9M23 3l7 6-8 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="record" aria-hidden="true"></span></button><audio id="bgm" src="./bgm.mp3" loop preload="none" hidden playsinline></audio><main><section id="letter" class="paper"><div class="letter-top"><span>To Ruby</span><span aria-hidden="true">来自8800km外</span></div><div class="envelope" aria-hidden="true"><div class="insert">致最好的你</div><div class="flap"></div><div class="envelope-front"></div><div class="seal">LMF</div></div><h1>TO RUBY</h1><p class="subtitle">Sep. 07. 2026</p><form id="unlock"><label class="sr-only" for="password">密码</label><input id="password" type="password" autocomplete="off" required aria-describedby="status" placeholder="你的生日"><button class="primary" id="submit" type="submit">拆 信 <span aria-hidden="true">↗</span></button></form><div id="player" hidden><p class="listen-note">慢慢听。</p><audio id="audio" controls preload="metadata" aria-label="信件录音"></audio><button id="lock" class="text-button" type="button">关闭</button></div><p id="status" class="status" role="status" aria-live="polite"></p></section><noscript>请开启 JavaScript 后打开。</noscript></main><script>
+<body><button id="music" class="record-button" type="button" aria-label="播放背景音乐" aria-pressed="false" title="播放背景音乐"><span class="music-hint" aria-hidden="true"><span id="music-label">轻点听音乐</span><svg width="33" height="20" viewBox="0 0 33 20" fill="none"><path d="M1 16Q14 1 29 9M23 3l7 6-8 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="record" aria-hidden="true"></span></button><audio id="bgm" src="./bgm.mp3" loop preload="none" hidden playsinline></audio><main><section id="letter" class="paper"><div class="letter-top"><span>To Ruby</span><span aria-hidden="true">来自8800km外</span></div><div class="envelope" aria-hidden="true"><div class="insert">致最好的你</div><div class="flap"></div><div class="envelope-front"></div><div class="seal">LMF</div></div><h1>TO RUBY</h1><p class="subtitle">Sep. 07. 2026</p><form id="unlock"><label class="sr-only" for="password">密码</label><input id="password" type="password" autocomplete="off" required aria-describedby="status" placeholder="你的生日"><button class="primary" id="submit" type="submit">拆 信 <span aria-hidden="true">↗</span></button></form><div id="player" hidden><p class="listen-note">慢慢听。</p><audio id="audio" preload="metadata" aria-label="信件录音" hidden playsinline></audio><div class="voice-controls" role="group" aria-label="信件录音播放器"><button id="voice-toggle" class="voice-toggle" type="button" aria-label="播放信件录音" aria-controls="audio"><svg id="voice-play-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3l12 7-12 7z"/></svg><svg id="voice-pause-icon" viewBox="0 0 20 20" aria-hidden="true" hidden><path d="M4 3h4v14H4zm8 0h4v14h-4z"/></svg></button><div class="voice-track"><input id="voice-seek" class="voice-seek" type="range" min="0" max="0" value="0" step="0.1" disabled aria-label="信件录音播放进度" aria-controls="audio" aria-valuetext="0:00 / 0:00"><span id="voice-time" class="voice-time" aria-hidden="true">0:00 / 0:00</span></div></div><button id="lock" class="text-button" type="button">关闭</button></div><p id="status" class="status" role="status" aria-live="polite"></p></section><noscript>请开启 JavaScript 后打开。</noscript></main><script>
 'use strict';
 // Compatible with the original encrypt.html: salt(16) + IV(12) + AES-GCM ciphertext/tag.
 async function decryptVoice(bytes,password){
@@ -18,6 +29,34 @@ async function decryptVoice(bytes,password){
 // The legacy encrypted format has no MIME metadata. Recognize common audio containers.
 function audioType(buffer){const b=new Uint8Array(buffer);const s=(a,z)=>String.fromCharCode(...b.slice(a,z));if(s(0,4)==='RIFF'&&s(8,12)==='WAVE')return 'audio/wav';if(s(4,8)==='ftyp')return 'audio/mp4';if(s(0,4)==='OggS')return 'audio/ogg';if(s(0,4)==='fLaC')return 'audio/flac';if(b[0]===0x1a&&b[1]===0x45)return 'audio/webm';return 'audio/mpeg';}
 const $=id=>document.getElementById(id);let audioURL=null;
+
+// Keep the media element as the single source of truth, including external pauses.
+const voice=$('audio'),voiceToggle=$('voice-toggle'),voiceSeek=$('voice-seek');
+function voiceTime(seconds){seconds=Number.isFinite(seconds)?Math.max(0,Math.floor(seconds)):0;const minutes=Math.floor(seconds/60);return minutes+':'+String(seconds%60).padStart(2,'0');}
+function syncVoicePlayer(){
+ const duration=Number.isFinite(voice.duration)&&voice.duration>0?voice.duration:0;
+ const current=duration?Math.min(duration,Math.max(0,voice.currentTime||0)):0;
+ const playing=!voice.paused&&!voice.ended;
+ voiceToggle.setAttribute('aria-label',playing?'暂停信件录音':'播放信件录音');
+ $('voice-play-icon').toggleAttribute('hidden',playing);$('voice-pause-icon').toggleAttribute('hidden',!playing);
+ voiceSeek.disabled=!duration;voiceSeek.max=String(duration);voiceSeek.value=String(current);
+ voiceSeek.style.setProperty('--progress',duration?(current/duration*100)+'%':'0%');
+ const time=voiceTime(current)+' / '+voiceTime(duration);
+ $('voice-time').textContent=time;voiceSeek.setAttribute('aria-valuetext',time);
+}
+voiceToggle.addEventListener('click',async()=>{
+ if(!voice.paused&&!voice.ended){voice.pause();return;}
+ try{await voice.play();if($('status').textContent==='轻点播放')$('status').textContent='';}
+ catch(error){if(error.name!=='AbortError'&&!$('player').hidden&&!voice.error)$('status').textContent='轻点播放';}
+ syncVoicePlayer();
+});
+// Native range keyboard support: arrows, Home and End; button supports Enter/Space.
+voiceSeek.addEventListener('input',()=>{
+ if(Number.isFinite(voice.duration)&&voice.duration>0){voice.currentTime=Math.min(voice.duration,Math.max(0,Number(voiceSeek.value)));syncVoicePlayer();}
+});
+for(const event of ['loadedmetadata','durationchange','timeupdate','play','playing','pause','ended','emptied','error','seeked'])voice.addEventListener(event,syncVoicePlayer);
+syncVoicePlayer();
+
 
 $('unlock').addEventListener('submit',async event=>{
  event.preventDefault();if($('submit').disabled)return;
@@ -31,11 +70,11 @@ $('unlock').addEventListener('submit',async event=>{
   const bytes=new Uint8Array(await response.arrayBuffer());
   let decrypted;try{decrypted=await decryptVoice(bytes,password);}catch(error){if(error.name==='OperationError')throw new Error('密码不匹配，或录音文件已损坏。请检查后重试。');throw error;}
   audioURL=URL.createObjectURL(new Blob([decrypted],{type:audioType(decrypted)}));
-  $('letter').classList.add('opened');$('audio').src=audioURL;$('password').value='';$('unlock').hidden=true;$('player').hidden=false;$('status').textContent='';$('audio').focus();try{await $('audio').play();}catch{$('status').textContent='轻点播放';}
+  $('letter').classList.add('opened');$('audio').src=audioURL;$('password').value='';$('unlock').hidden=true;$('player').hidden=false;$('status').textContent='';$('voice-toggle').focus();try{await $('audio').play();}catch{$('status').textContent='轻点播放';}
  }catch(error){$('status').textContent=error.message||'暂时无法打开，请重试。';}
  finally{$('submit').disabled=false;}
 });
-function lock(){ $('letter').classList.remove('opened'); $('audio').pause();$('audio').removeAttribute('src');$('audio').load();if(audioURL)URL.revokeObjectURL(audioURL);audioURL=null;$('player').hidden=true;$('unlock').hidden=false;$('password').value='';$('status').textContent='';}
+function lock(){ $('letter').classList.remove('opened'); $('audio').pause();$('audio').removeAttribute('src');$('audio').load();syncVoicePlayer();if(audioURL)URL.revokeObjectURL(audioURL);audioURL=null;$('player').hidden=true;$('unlock').hidden=false;$('password').value='';$('status').textContent='';}
 $('lock').addEventListener('click',()=>{lock();$('password').focus();});
 $('audio').addEventListener('error',()=>{if(audioURL)$('status').textContent='已解密，但浏览器无法播放此音频。请用 MP3 原文件重新加密。';});
 window.addEventListener('pagehide',lock);
